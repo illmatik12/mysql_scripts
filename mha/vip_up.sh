@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #ip addr add 10.238.191.214/24 dev ens192 label ens192:1;arping -c3 -D -I ens192 -s 10.238.191.214 10.238.191.21
 
 vip_start='ip addr add 10.238.191.238/24 dev ens192 label ens192:1;arping -c3 -D -I ens192 -s 10.238.191.238 10.238.191.238'
@@ -12,7 +12,7 @@ check_interface=`ifconfig -a | grep ens192:1 | wc -l`
 
 check_mysql=`ps -ef | grep mysqld | grep -v grep | wc -l`
 
-check_slave=`mysql -uroot -p'ldccm2020!@#' -e "show slave status;" | wc -l`
+check_slave=`mysql -uroot -p'password' -e "show slave status;" | wc -l`
 
 
 echo $check_slave
