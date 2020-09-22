@@ -25,5 +25,14 @@ if [ $st -eq 1 ]; then
         echo "#################################################"
 
 fi
+
+mem_free=`free | grep Mem | awk '{print $4/$2 * 100}'`
+mem_stat=`echo "$mem_free < 1" | bc`
+
+if [ $mem_stat -eq 1 ]; then
+        echo "kill thread"
+        mysql  -e "show processlist" |  grep Query | grep "SELECT" | awk '{print "KILL "$1";"}'| mysql 
+
+fi
 sleep 5
 done
